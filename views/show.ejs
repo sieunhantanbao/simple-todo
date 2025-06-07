@@ -1,0 +1,7 @@
+<h2><%= todo.title %></h2>
+<p>Status: 
+  <span class="badge bg-<%= todo.completed ? 'success' : 'secondary' %>">
+    <%= todo.completed ? 'Done' : 'Pending' %>
+  </span>
+</p>
+<a href="/" class="btn btn-secondary">Back</a>

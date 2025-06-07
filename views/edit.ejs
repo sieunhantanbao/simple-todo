@@ -1,0 +1,9 @@
+<h2>Edit Todo</h2>
+<form method="post" action="/todos/<%= todo.id %>">
+  <div class="mb-3">
+    <label for="completed" class="form-label">Completed:</label>
+    <input type="checkbox" name="completed" id="completed" <%= todo.completed ? 'checked' : '' %>>
+  </div>
+  <button class="btn btn-primary">Save</button>
+  <a href="/" class="btn btn-secondary">Cancel</a>
+</form>

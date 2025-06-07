@@ -1,0 +1,39 @@
+<a href="/todos/new" class="btn btn-success mb-3">
+  <i class="fa fa-plus"></i> New Todo
+</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% todos.forEach(todo => { %>
+      <tr>
+        <td><%= todo.title %></td>
+        <td>
+          <span class="badge bg-<%= todo.completed ? 'success' : 'secondary' %>">
+            <%= todo.completed ? 'Done' : 'Pending' %>
+          </span>
+        </td>
+        <td>
+          <a href="/todos/<%= todo.id %>" class="btn btn-sm btn-outline-primary me-1" title="View">
+            <i class="fa fa-eye"></i>
+          </a>
+          <a href="/todos/<%= todo.id %>/edit" class="btn btn-sm btn-outline-warning me-1" title="Edit">
+            <i class="fa fa-edit"></i>
+          </a>
+          <form id="delete-form-<%= todo.id %>" action="/todos/<%= todo.id %>/delete" method="post" class="d-inline">
+            <button type="button" class="btn btn-sm btn-outline-danger" title="Delete"
+                    onclick="confirmDelete('delete-form-<%= todo.id %>')">
+              <i class="fa fa-trash"></i>
+            </button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
