@@ -1,0 +1,7 @@
+TIMESTAMP: 2026-10-11 02:15:00 AM
+SEVERITY: CRITICAL
+SOURCE: Main_SQL_Server_Cluster
+
+ALERT: Database crash detected. CPU utilization at 100%. 
+DETAILS: Max connection pool size exhausted (10,000 active connections). The database was overwhelmed by a sudden spike in read/write requests.
+ANALYSIS: 95% of the incoming database connections originated from an internal microservice named `Legacy-Retry-Service`. This service flooded the database with queries without any circuit breaker pattern implemented.

@@ -1,0 +1,94 @@
+{
+  "surfaceId": "incident-report-form",
+  "components": [
+    { "id": "root", "component": "Column", "children": ["title", "hint", "name", "email", "type", "date", "impact", "description", "actions", "separator", "submit"] },
+    { "id": "title", "component": "Text", "text": "Security incident report", "variant": "h4" },
+    { "id": "hint", "component": "Text", "text": "Describe the incident and review the details before submitting.", "variant": "caption" },
+
+    { "id": "name", "component": "TextField", "label": "Full name", "value": { "path": "/report/name" }, "variant": "shortText" },
+    { "id": "email", "component": "TextField", "label": "Email", "value": { "path": "/report/email" }, "variant": "shortText" },
+
+    {
+      "id": "type",
+      "component": "ChoicePicker",
+      "label": "Incident type",
+      "variant": "mutuallyExclusive",
+      "value": { "path": "/report/incidentType" },
+      "options": [
+        { "label": "Phishing attack", "value": "phishing" },
+        { "label": "Malware", "value": "malware" },
+        { "label": "Data breach", "value": "data_breach" },
+        { "label": "Unauthorized access", "value": "unauthorized_access" },
+        { "label": "DDoS attack", "value": "ddos" },
+        { "label": "Other", "value": "other" }
+      ]
+    },
+    { "id": "date", "component": "DateTimeInput", "label": "Date of incident", "value": { "path": "/report/date" }, "enableDate": true, "enableTime": false },
+
+    {
+      "id": "impact",
+      "component": "ChoicePicker",
+      "label": "Impact level",
+      "variant": "mutuallyExclusive",
+      "value": { "path": "/report/impactLevel" },
+      "options": [
+        { "label": "Critical - severe business impact", "value": "critical" },
+        { "label": "High - significant business impact", "value": "high" },
+        { "label": "Medium - limited business impact", "value": "medium" },
+        { "label": "Low - minimal business impact", "value": "low" }
+      ]
+    },
+    { "id": "description", "component": "TextField", "label": "Incident description", "value": { "path": "/report/description" }, "variant": "longText" },
+    { "id": "actions", "component": "TextField", "label": "Suggested actions", "value": { "path": "/report/suggestedActions" }, "variant": "longText" },
+    { "id": "separator", "component": "Divider", "axis": "horizontal" },
+
+    {
+      "id": "submit",
+      "component": "Button",
+      "variant": "primary",
+      "child": "submit-label",
+      "action": {
+        "event": {
+          "name": "incident_report_submitted",
+          "context": {
+            "name": { "path": "/report/name" },
+            "email": { "path": "/report/email" },
+            "incidentType": { "path": "/report/incidentType" },
+            "date": { "path": "/report/date" },
+            "impactLevel": { "path": "/report/impactLevel" },
+            "description": { "path": "/report/description" },
+            "suggestedActions": { "path": "/report/suggestedActions" }
+          }
+        }
+      },
+      "checks": [
+        {
+          "condition": {
+            "call": "required",
+            "args": { "value": { "path": "/report/name" } }
+          },
+          "message": "Full name is required."
+        },
+        {
+          "condition": {
+            "call": "required",
+            "args": { "value": { "path": "/report/email" } }
+          },
+          "message": "Email is required."
+        }
+      ]
+    },
+    { "id": "submit-label", "component": "Text", "text": "Submit incident report" }
+  ],
+  "data": {
+    "report": {
+      "name": "",
+      "email": "",
+      "incidentType": [],
+      "date": "",
+      "impactLevel": [],
+      "description": "",
+      "suggestedActions": ""
+    }
+  }
+}

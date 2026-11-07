@@ -1,0 +1,699 @@
+{
+  "surfaceId": "architecture-workspace",
+  "components": [
+    {
+      "id": "root",
+      "component": "Column",
+      "children": [
+        "wizard"
+      ]
+    },
+    {
+      "id": "wizard",
+      "component": "Tabs",
+      "tabs": [
+        {
+          "title": "1. Requirements",
+          "child": "requirements-pane"
+        },
+        {
+          "title": "2. Options",
+          "child": "options-pane"
+        },
+        {
+          "title": "3. Decision",
+          "child": "decision-pane"
+        }
+      ]
+    },
+    {
+      "id": "requirements-pane",
+      "component": "Column",
+      "children": [
+        "req-title",
+        "req-hint",
+        "req-workload",
+        "req-cloud",
+        "req-users",
+        "req-data",
+        "req-availability",
+        "req-security",
+        "req-budget",
+        "req-priority",
+        "req-submit"
+      ]
+    },
+    {
+      "id": "req-title",
+      "component": "Text",
+      "text": "Architecture design brief",
+      "variant": "h4"
+    },
+    {
+      "id": "req-hint",
+      "component": "Text",
+      "text": "Describe the system and constraints. The agent will compare three designs; assumptions will be called out.",
+      "variant": "caption"
+    },
+    {
+      "id": "req-workload",
+      "component": "TextField",
+      "label": "What are we building?",
+      "value": {
+        "path": "/requirements/workload"
+      },
+      "variant": "shortText"
+    },
+    {
+      "id": "req-cloud",
+      "component": "ChoicePicker",
+      "label": "Preferred platform",
+      "variant": "mutuallyExclusive",
+      "value": {
+        "path": "/requirements/cloud"
+      },
+      "options": [
+        {
+          "label": "Azure",
+          "value": "Azure"
+        },
+        {
+          "label": "AWS",
+          "value": "AWS"
+        },
+        {
+          "label": "Google Cloud",
+          "value": "Google Cloud"
+        },
+        {
+          "label": "Cloud-agnostic / undecided",
+          "value": "Undecided"
+        }
+      ]
+    },
+    {
+      "id": "req-users",
+      "component": "TextField",
+      "label": "Expected scale / traffic",
+      "value": {
+        "path": "/requirements/scale"
+      },
+      "variant": "shortText"
+    },
+    {
+      "id": "req-data",
+      "component": "TextField",
+      "label": "Data and integration needs",
+      "value": {
+        "path": "/requirements/dataNeeds"
+      },
+      "variant": "shortText"
+    },
+    {
+      "id": "req-availability",
+      "component": "ChoicePicker",
+      "label": "Reliability target",
+      "variant": "mutuallyExclusive",
+      "value": {
+        "path": "/requirements/reliability"
+      },
+      "options": [
+        {
+          "label": "Standard",
+          "value": "Standard"
+        },
+        {
+          "label": "High availability",
+          "value": "High availability"
+        },
+        {
+          "label": "Mission-critical",
+          "value": "Mission-critical"
+        },
+        {
+          "label": "Not decided",
+          "value": "Not decided"
+        }
+      ]
+    },
+    {
+      "id": "req-security",
+      "component": "TextField",
+      "label": "Security / compliance constraints",
+      "value": {
+        "path": "/requirements/security"
+      },
+      "variant": "shortText"
+    },
+    {
+      "id": "req-budget",
+      "component": "ChoicePicker",
+      "label": "Cost and complexity preference",
+      "variant": "mutuallyExclusive",
+      "value": {
+        "path": "/requirements/costProfile"
+      },
+      "options": [
+        {
+          "label": "Cost-conscious",
+          "value": "Cost-conscious"
+        },
+        {
+          "label": "Balanced",
+          "value": "Balanced"
+        },
+        {
+          "label": "Optimize for scale / resilience",
+          "value": "Scale / resilience"
+        }
+      ]
+    },
+    {
+      "id": "req-priority",
+      "component": "TextField",
+      "label": "Other constraints or non-functional requirements",
+      "value": {
+        "path": "/requirements/constraints"
+      },
+      "variant": "shortText"
+    },
+    {
+      "id": "req-submit",
+      "component": "Button",
+      "variant": "primary",
+      "child": "req-submit-label",
+      "checks": [
+        {
+          "condition": {
+            "call": "required",
+            "args": {
+              "value": {
+                "path": "/requirements/workload"
+              }
+            },
+            "returnType": "boolean"
+          },
+          "message": "Describe what you are building."
+        }
+      ],
+      "action": {
+        "event": {
+          "name": "architecture_generate_requested",
+          "context": {
+            "workload": {
+              "path": "/requirements/workload"
+            },
+            "cloud": {
+              "path": "/requirements/cloud"
+            },
+            "scale": {
+              "path": "/requirements/scale"
+            },
+            "dataNeeds": {
+              "path": "/requirements/dataNeeds"
+            },
+            "reliability": {
+              "path": "/requirements/reliability"
+            },
+            "security": {
+              "path": "/requirements/security"
+            },
+            "costProfile": {
+              "path": "/requirements/costProfile"
+            },
+            "constraints": {
+              "path": "/requirements/constraints"
+            },
+            "advanceTab": "wizard"
+          }
+        }
+      }
+    },
+    {
+      "id": "req-submit-label",
+      "component": "Text",
+      "text": "Compare architecture options"
+    },
+    {
+      "id": "options-pane",
+      "component": "Column",
+      "children": [
+        "options-title",
+        "options-hint",
+        "o1-row",
+        "option1-divider",
+        "o2-row",
+        "option2-divider",
+        "o3-row",
+        "options-picker",
+        "options-submit"
+      ]
+    },
+    {
+      "id": "options-title",
+      "component": "Text",
+      "text": {
+        "path": "/options/heading"
+      },
+      "variant": "h4"
+    },
+    {
+      "id": "options-hint",
+      "component": "Text",
+      "text": {
+        "path": "/options/subheading"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "o1-row",
+      "component": "Row",
+      "justify": "spaceBetween",
+      "align": "start",
+      "children": [
+        "o1-info",
+        "o1-fit"
+      ]
+    },
+    {
+      "id": "o1-info",
+      "component": "Column",
+      "children": [
+        "o1-name",
+        "o1-summary",
+        "o1-tradeoff"
+      ]
+    },
+    {
+      "id": "o1-name",
+      "component": "Text",
+      "text": {
+        "path": "/options/o1/name"
+      },
+      "variant": "body"
+    },
+    {
+      "id": "o1-summary",
+      "component": "Text",
+      "text": {
+        "path": "/options/o1/summary"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "o1-tradeoff",
+      "component": "Text",
+      "text": {
+        "path": "/options/o1/tradeoff"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "o1-fit",
+      "component": "Text",
+      "text": {
+        "path": "/options/o1/fit"
+      },
+      "variant": "body"
+    },
+    {
+      "id": "option1-divider",
+      "component": "Divider",
+      "axis": "horizontal"
+    },
+    {
+      "id": "o2-row",
+      "component": "Row",
+      "justify": "spaceBetween",
+      "align": "start",
+      "children": [
+        "o2-info",
+        "o2-fit"
+      ]
+    },
+    {
+      "id": "o2-info",
+      "component": "Column",
+      "children": [
+        "o2-name",
+        "o2-summary",
+        "o2-tradeoff"
+      ]
+    },
+    {
+      "id": "o2-name",
+      "component": "Text",
+      "text": {
+        "path": "/options/o2/name"
+      },
+      "variant": "body"
+    },
+    {
+      "id": "o2-summary",
+      "component": "Text",
+      "text": {
+        "path": "/options/o2/summary"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "o2-tradeoff",
+      "component": "Text",
+      "text": {
+        "path": "/options/o2/tradeoff"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "o2-fit",
+      "component": "Text",
+      "text": {
+        "path": "/options/o2/fit"
+      },
+      "variant": "body"
+    },
+    {
+      "id": "option2-divider",
+      "component": "Divider",
+      "axis": "horizontal"
+    },
+    {
+      "id": "o3-row",
+      "component": "Row",
+      "justify": "spaceBetween",
+      "align": "start",
+      "children": [
+        "o3-info",
+        "o3-fit"
+      ]
+    },
+    {
+      "id": "o3-info",
+      "component": "Column",
+      "children": [
+        "o3-name",
+        "o3-summary",
+        "o3-tradeoff"
+      ]
+    },
+    {
+      "id": "o3-name",
+      "component": "Text",
+      "text": {
+        "path": "/options/o3/name"
+      },
+      "variant": "body"
+    },
+    {
+      "id": "o3-summary",
+      "component": "Text",
+      "text": {
+        "path": "/options/o3/summary"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "o3-tradeoff",
+      "component": "Text",
+      "text": {
+        "path": "/options/o3/tradeoff"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "o3-fit",
+      "component": "Text",
+      "text": {
+        "path": "/options/o3/fit"
+      },
+      "variant": "body"
+    },
+    {
+      "id": "options-picker",
+      "component": "ChoicePicker",
+      "label": "Select an option to review",
+      "variant": "mutuallyExclusive",
+      "value": {
+        "path": "/options/choice"
+      },
+      "options": [
+        {
+          "label": {
+            "path": "/options/o1/name"
+          },
+          "value": "o1"
+        },
+        {
+          "label": {
+            "path": "/options/o2/name"
+          },
+          "value": "o2"
+        },
+        {
+          "label": {
+            "path": "/options/o3/name"
+          },
+          "value": "o3"
+        }
+      ]
+    },
+    {
+      "id": "options-submit",
+      "component": "Button",
+      "variant": "primary",
+      "child": "options-submit-label",
+      "action": {
+        "event": {
+          "name": "architecture_option_selected",
+          "context": {
+            "choice": {
+              "path": "/options/choice"
+            },
+            "advanceTab": "wizard"
+          }
+        }
+      }
+    },
+    {
+      "id": "options-submit-label",
+      "component": "Text",
+      "text": "Review selected architecture"
+    },
+    {
+      "id": "decision-pane",
+      "component": "Column",
+      "children": [
+        "decision-title",
+        "decision-hint",
+        "decision-name-row",
+        "decision-rationale-title",
+        "decision-rationale",
+        "decision-components-title",
+        "decision-components",
+        "decision-risks-title",
+        "decision-risks",
+        "decision-adr-title",
+        "decision-adr",
+        "decision-boundary",
+        "decision-actions"
+      ]
+    },
+    {
+      "id": "decision-title",
+      "component": "Text",
+      "text": "Architecture decision summary",
+      "variant": "h4"
+    },
+    {
+      "id": "decision-hint",
+      "component": "Text",
+      "text": "Review the recommendation, assumptions, trade-offs, and open questions before accepting it.",
+      "variant": "caption"
+    },
+    {
+      "id": "decision-name-row",
+      "component": "Column",
+      "children": [
+        "decision-name-label",
+        "decision-name"
+      ]
+    },
+    {
+      "id": "decision-name-label",
+      "component": "Text",
+      "text": "Selected option",
+      "variant": "caption"
+    },
+    {
+      "id": "decision-name",
+      "component": "Text",
+      "text": {
+        "path": "/review/selectedOption"
+      },
+      "variant": "body"
+    },
+    {
+      "id": "decision-rationale-title",
+      "component": "Text",
+      "text": "Why this fits",
+      "variant": "body"
+    },
+    {
+      "id": "decision-rationale",
+      "component": "Text",
+      "text": {
+        "path": "/review/rationale"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "decision-components-title",
+      "component": "Text",
+      "text": "Key building blocks",
+      "variant": "body"
+    },
+    {
+      "id": "decision-components",
+      "component": "Text",
+      "text": {
+        "path": "/review/components"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "decision-risks-title",
+      "component": "Text",
+      "text": "Risks, assumptions and open questions",
+      "variant": "body"
+    },
+    {
+      "id": "decision-risks",
+      "component": "Text",
+      "text": {
+        "path": "/review/risks"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "decision-adr-title",
+      "component": "Text",
+      "text": "Decision record",
+      "variant": "body"
+    },
+    {
+      "id": "decision-adr",
+      "component": "Text",
+      "text": {
+        "path": "/review/adrSummary"
+      },
+      "variant": "caption"
+    },
+    {
+      "id": "decision-boundary",
+      "component": "Divider",
+      "axis": "horizontal"
+    },
+    {
+      "id": "decision-actions",
+      "component": "Row",
+      "justify": "spaceBetween",
+      "align": "center",
+      "children": [
+        "decision-revise",
+        "decision-accept"
+      ]
+    },
+    {
+      "id": "decision-revise",
+      "component": "Button",
+      "variant": "default",
+      "child": "decision-revise-label",
+      "action": {
+        "event": {
+          "name": "architecture_revision_requested",
+          "context": {}
+        }
+      }
+    },
+    {
+      "id": "decision-revise-label",
+      "component": "Text",
+      "text": "Revise requirements"
+    },
+    {
+      "id": "decision-accept",
+      "component": "Button",
+      "variant": "primary",
+      "child": "decision-accept-label",
+      "action": {
+        "event": {
+          "name": "architecture_plan_accepted",
+          "context": {
+            "selectedOption": {
+              "path": "/review/selectedOption"
+            },
+            "adrSummary": {
+              "path": "/review/adrSummary"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "decision-accept-label",
+      "component": "Text",
+      "text": "Accept this design"
+    }
+  ],
+  "data": {
+    "__tabs": {
+      "wizard": 0
+    },
+    "requirements": {
+      "workload": "",
+      "cloud": [
+        "Undecided"
+      ],
+      "scale": "",
+      "dataNeeds": "",
+      "reliability": [
+        "Not decided"
+      ],
+      "security": "",
+      "costProfile": [
+        "Balanced"
+      ],
+      "constraints": ""
+    },
+    "options": {
+      "heading": "Architecture alternatives",
+      "subheading": "Submit your brief to compare three approaches.",
+      "o1": {
+        "name": "Option 1 — Simple",
+        "summary": "A minimal, low-operations design for a modest workload.",
+        "tradeoff": "Trade-off: fewer moving parts, less headroom for growth.",
+        "fit": "Best for: early stage"
+      },
+      "o2": {
+        "name": "Option 2 — Balanced",
+        "summary": "Managed services with clear scaling and resilience boundaries.",
+        "tradeoff": "Trade-off: moderate cost and operational complexity.",
+        "fit": "Best for: most workloads"
+      },
+      "o3": {
+        "name": "Option 3 — Scale-ready",
+        "summary": "Decoupled components and stronger isolation for high demand.",
+        "tradeoff": "Trade-off: higher cost and more operational complexity.",
+        "fit": "Best for: demanding workloads"
+      },
+      "choice": []
+    },
+    "review": {
+      "selectedOption": "Select an option to see the decision summary.",
+      "rationale": "The agent will explain how the design maps to your requirements.",
+      "components": "Key components will be listed here.",
+      "risks": "Assumptions, risks, and unresolved questions will be listed here.",
+      "adrSummary": "Context, decision, alternatives, and consequences will be summarized here."
+    }
+  }
+}

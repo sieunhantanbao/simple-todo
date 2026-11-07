@@ -1,0 +1,11 @@
+[Kênh Slack: #payment-squad-dev]
+[Date: 2026-10-09]
+
+David Tran (18:45): 
+Anh em ơi, tôi vừa deploy NServiceBus message schema v2 lên production xong nhé. Đã run success.
+
+Hung Do (18:50): 
+Ngon. Bản update này có gì mới không anh?
+
+David Tran (18:52): 
+Tôi thêm trường `LoyaltyPoints` vào cái `PaymentCompleted` event thôi. Data type là Integer. Đáng lẽ phải báo cho các team khác biết, nhưng tôi check thấy Schema Registry cấu hình default value được nên nghĩ chắc backward compatibility (tương thích ngược) vẫn ổn. Không cần thông báo đâu, cứ im lặng mà làm cho lẹ.
