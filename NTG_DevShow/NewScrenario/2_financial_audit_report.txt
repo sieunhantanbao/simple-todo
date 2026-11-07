@@ -1,0 +1,8 @@
+# Báo cáo kiểm toán nội bộ bất thường
+Ngày: 10/05/2026
+Người thực hiện: Sarah Jenkins (Trưởng phòng Kiểm toán)
+
+Ghi chú:
+Trong quá trình rà soát dòng tiền của tập đoàn Nexus trong quý 1, phát hiện một khoản ngân sách khổng lồ lên tới 50 triệu USD được chuyển ra nước ngoài dưới danh nghĩa "Chi phí nghiên cứu mở rộng".
+Khoản tiền này không đi vào các phòng lab chính thức của tập đoàn, mà được rót toàn bộ vào một quỹ đầu tư ẩn danh có tên là "Vanguard Holdings".
+Theo hồ sơ đăng ký kinh doanh quốc tế bị rò rỉ, Vanguard Holdings thực chất là một công ty vỏ bọc. Người đại diện pháp luật duy nhất đứng tên thành lập Vanguard Holdings chính là Tiến sĩ Evelyn Reed.

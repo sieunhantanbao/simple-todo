@@ -1,0 +1,8 @@
+# Báo cáo sự cố an ninh - Tòa nhà C
+Ngày: 05/10/2026
+Người ghi nhận: Tổ bảo vệ ca đêm
+
+Chi tiết sự cố:
+Vào lúc 02:30 sáng, hệ thống camera ghi nhận có người xâm nhập vào Khu vực X (nơi đặt nguyên mẫu thử nghiệm).
+Nhân viên bảo vệ đã tiến hành kiểm tra nhưng phát hiện người đó sử dụng thẻ khóa thẻ đỏ quyền lực cao nhất (Red Clearance). 
+Người quẹt thẻ và đi vào phòng thí nghiệm ngầm lúc nửa đêm chính là CEO Alex Mercer. Ông ta đi ra sau đó 2 tiếng với một chiếc cặp màu đen có logo hình ngôi sao.
